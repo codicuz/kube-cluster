@@ -1,0 +1,9 @@
+---
+- name: Print the actual user
+  command: whoami
+  register: result
+- debug:
+    msg: 
+    - "{{ result.stdout }}"
+  
+  

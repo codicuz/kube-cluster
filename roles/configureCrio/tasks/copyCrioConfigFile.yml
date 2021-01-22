@@ -1,0 +1,10 @@
+---
+- name: copy crio.conf
+  template:
+    src: crio.conf.j2
+    dest: /etc/modules-load.d/crio.conf
+    backup: yes
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"

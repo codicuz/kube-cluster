@@ -1,0 +1,78 @@
+---
+- name: Install yum-utils
+  yum:
+    name: yum-utils
+    state: latest
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"
+
+- name: yum-config-manager
+  shell: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"
+
+- name: Install docker-ce
+  yum:
+    name: docker-ce
+    state: latest
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"
+
+- name: Install docker-ce-cli
+  yum:
+    name: docker-ce-cli
+    state: latest
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"
+
+- name: Install containerd.io
+  yum:
+    name: containerd.io
+    state: latest
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"
+
+- name: enable docker daemon
+  ansible.builtin.systemd:
+    name: docker
+    enabled: yes
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"  
+
+# - name: start docker daemon
+#   ansible.builtin.systemd:
+#     state: started
+#     name: docker
+#   register: result
+# - debug:
+#     msg:
+#     - "{{ result }}"  
+
+- name: copy daemon.json
+  template:
+    src: daemon.json.j2
+    dest: /etc/docker/daemon
+    backup: yes
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"
+
+- name: workaround start daemon start
+  shell: systemctl start docker
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"

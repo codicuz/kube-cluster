@@ -1,0 +1,5 @@
+#!/usr/bin/env ansible-playbook
+
+- hosts: masters
+  roles:
+  - aptKubeMaster

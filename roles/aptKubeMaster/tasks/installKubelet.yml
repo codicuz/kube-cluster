@@ -1,0 +1,9 @@
+---
+- name: install kubelet
+  apt: 
+    name: kubelet
+    state: latest
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"

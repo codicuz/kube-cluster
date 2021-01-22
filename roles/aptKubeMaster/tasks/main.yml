@@ -1,0 +1,7 @@
+- include: installDocker.yml
+- include: installAptTransportHttps.yml
+- include: addKubernetesAptKey.yml
+- include: addKubernetesAptRepository.yml
+- include: installKubelet.yml
+- include: installKubeadm.yml
+- include: installKubectl.yml

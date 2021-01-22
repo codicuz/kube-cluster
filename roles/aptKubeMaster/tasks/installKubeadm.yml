@@ -1,0 +1,9 @@
+---
+- name: install kubeadm
+  apt: 
+    name: kubeadm
+    state: latest
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"

@@ -1,0 +1,9 @@
+---
+- name: install kubectl
+  apt: 
+    name: kubectl
+    state: latest
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"

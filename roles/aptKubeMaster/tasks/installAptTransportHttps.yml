@@ -1,0 +1,9 @@
+---
+- name: install APT Transport HTTPS
+  apt: 
+    name: apt-transport-https
+    state: latest
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"

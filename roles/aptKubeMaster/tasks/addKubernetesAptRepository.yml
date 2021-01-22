@@ -1,0 +1,10 @@
+---
+- name: add kubernetes APT repository
+  apt_repository:
+    repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
+    state: present
+    filename: 'kubernetes'
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"

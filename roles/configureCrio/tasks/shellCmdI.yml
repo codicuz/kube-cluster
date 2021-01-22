@@ -1,0 +1,35 @@
+---
+- name: modprobe overlay
+  shell: modprobe overlay
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"
+
+- name: modprobe br_netfilter
+  shell: modprobe br_netfilter
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"
+
+- name: sysctl --system
+  shell: sysctl --system
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"
+
+- name: curl I
+  shell: curl -L -o /etc/yum.repos.d/devel:kubic:libcontainers:stable.repo https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/CentOS_8_Stream/devel:kubic:libcontainers:stable.repo
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"
+
+- name: curl II
+  shell: curl -L -o /etc/yum.repos.d/devel:kubic:libcontainers:stable:cri-o:1.20.0.repo https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable:cri-o:1.20.0/CentOS_8_Stream/devel:kubic:libcontainers:stable:cri-o:1.20.0.repo
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"

@@ -1,0 +1,4 @@
+- include: addRepo.yml
+- include: installDocker.yml
+- include: installKubelet.yml
+- include: installKubeadm.yml

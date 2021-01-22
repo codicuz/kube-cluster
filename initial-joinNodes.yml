@@ -1,0 +1,10 @@
+#!/usr/bin/env ansible-playbook
+
+- hosts: masters
+  gather_facts: false
+  roles:
+  - getJoinCommand
+
+- hosts: nodes
+  roles:
+  - joinNodes

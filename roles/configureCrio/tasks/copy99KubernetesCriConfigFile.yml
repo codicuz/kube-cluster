@@ -1,0 +1,10 @@
+---
+- name: copy kubernetes-cri.conf
+  template:
+    src: 99-kubernetes-cri.conf.j2
+    dest: /etc/sysctl.d/99-kubernetes-cri.conf
+    backup: yes
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"

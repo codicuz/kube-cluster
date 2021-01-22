@@ -1,0 +1,9 @@
+---
+- name: Ugrade all packages
+  yum:
+    name: '*'
+    state: latest
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"

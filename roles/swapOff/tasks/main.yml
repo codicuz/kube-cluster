@@ -1,0 +1,7 @@
+---
+- name: swapOff
+  shell: swapoff -a
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"

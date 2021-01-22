@@ -1,0 +1,15 @@
+#!/usr/bin/env ansible-playbook
+
+- hosts: masters
+  gather_facts: false
+  roles:
+  - swapOff
+  - initKubeCluster
+  - getJoinCommand
+  - addSubnet
+
+- hosts: nodes
+  roles:
+  - swapOff
+  - joinNodes
+  - addSubnet

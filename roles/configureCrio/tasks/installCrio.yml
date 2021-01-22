@@ -1,0 +1,9 @@
+---
+- name: install cri-o
+  yum: 
+    name: cri-o
+    state: latest
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"

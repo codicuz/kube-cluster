@@ -1,0 +1,33 @@
+---
+- name: initialize the cluster
+  shell: kubeadm init --pod-network-cidr=10.200.0.0/16 >> cluster_initialized.txt
+  args:
+    chdir: $HOME
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"
+
+- name: create .kube directory
+  file:
+    path: $HOME/.kube
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"
+
+- name: copy admin.conf to user's kube config
+  copy:
+    src: /etc/kubernetes/admin.conf
+    dest: $HOME/.kube/config
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"
+
+- name: install Pod network
+  shell: kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"

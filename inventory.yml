@@ -1,0 +1,15 @@
+all:
+  children:
+    masters:
+      hosts:
+        192.168.88.2:
+          ansible_port: 22
+          ansible_user: root
+    nodes:
+      hosts:
+        192.168.88.56:
+          ansible_port: 22
+          ansible_user: root
+        192.168.88.57:
+          ansible_port: 22
+          ansible_user: root

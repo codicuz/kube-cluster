@@ -1,0 +1,10 @@
+---
+- name: Install packages
+  yum:
+    name: "{{ packages }}"
+    state: latest
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"
+    

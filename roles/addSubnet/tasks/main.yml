@@ -1,0 +1,9 @@
+- name: copy subnet.env
+  template:
+    src: subnet.env.j2
+    dest: /run/flannel/subnet.env
+    backup: yes
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"
