@@ -1,6 +1,6 @@
 ---
 - name: join nodes
-  shell: "{{ hostvars['192.168.88.2']['join_command'] }} >> node_joined.txt"
+  shell: "{{ hostvars['192.168.88.58']['join_command'] }} >> node_joined.txt"
   register: result
 - debug:
     msg:
