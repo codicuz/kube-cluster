@@ -1,0 +1,40 @@
+---
+- name: kubeadm reset force
+  shell: kubeadm reset --force
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"
+
+- name: remove .kube directory
+  file: 
+    path: ${HOME}/.kube
+    state: absent
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"
+
+- name: remove /run/flannel directory
+  file: 
+    path: /run/flannel
+    state: absent
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"
+
+- name: remove networks cni0
+  shell: ip link delete cni0
+  register: result
+  ignore_errors: yes
+- debug:
+    msg:
+    - "{{ result }}"
+
+- name: remove networks flannel.1
+  shell: ip link delete flannel.1
+  ignore_errors: yes
+- debug:
+    msg:
+    - "{{ result }}"

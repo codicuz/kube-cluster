@@ -1,5 +1,2 @@
 packages:
-  - docker
-  - mc
-  - itroute-tc
-  
+  - mc  

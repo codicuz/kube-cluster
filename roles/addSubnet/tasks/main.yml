@@ -1,3 +1,8 @@
+- name: Creates directory
+  file:
+    path: /run/flannel
+    state: directory
+
 - name: copy subnet.env
   template:
     src: subnet.env.j2

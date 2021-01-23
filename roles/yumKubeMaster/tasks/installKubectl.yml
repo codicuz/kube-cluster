@@ -1,0 +1,9 @@
+---
+- name: install kubectl
+  yum: 
+    name: kubectl
+    state: present
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"

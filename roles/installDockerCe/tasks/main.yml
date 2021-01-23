@@ -60,6 +60,11 @@
 #     msg:
 #     - "{{ result }}"  
 
+- name: create /etc/docker directory
+  file:
+    path: /etc/docker
+    state: directory
+
 - name: copy daemon.json
   template:
     src: daemon.json.j2

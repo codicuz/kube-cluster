@@ -3,6 +3,7 @@
   yum:
     name: "{{ packages }}"
     state: absent
+  ignore_errors: yes
   register: result
 - debug:
     msg:

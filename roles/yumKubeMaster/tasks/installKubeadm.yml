@@ -1,0 +1,9 @@
+---
+- name: install kubeadm
+  yum: 
+    name: kubeadm
+    state: present
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"

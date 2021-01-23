@@ -19,6 +19,9 @@ case "$1" in
 -aptKubeMaster)
 	ansible-playbook -i inventory.yml initial-aptKubeMaster.yml
 	;;
+-yumKubeMaster)
+	ansible-playbook -i inventory.yml initial-yumKubeMaster.yml
+	;;
 -yumKubeNode)
 	ansible-playbook -i inventory.yml initial-yumKubeNode.yml
 	;;
@@ -66,6 +69,12 @@ case "$1" in
 	;;
 -initKubeCluster)
 	ansible-playbook -i inventory.yml -e target=$TARGET initial-initKubeCluster.yml
+	;;
+-resetKubeCluster)
+	ansible-playbook -i inventory.yml initial-resetKubeCluster.yml
+	;;
+-prepareHost)
+	ansible-playbook -i inventory.yml initial-prepareHost.yml
 	;;
 -joinNodes)
 	ansible-playbook -i inventory.yml -e target=$TARGET initial-joinNodes.yml

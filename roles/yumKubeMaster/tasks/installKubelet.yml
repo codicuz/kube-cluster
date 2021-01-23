@@ -1,0 +1,9 @@
+---
+- name: install kubelet
+  yum: 
+    name: kubelet
+    state: present
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"

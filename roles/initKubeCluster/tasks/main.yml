@@ -1,6 +1,6 @@
 ---
 - name: initialize the cluster
-  shell: kubeadm init --pod-network-cidr=10.200.0.0/16 >> cluster_initialized.txt
+  shell: kubeadm init --pod-network-cidr=10.200.0.0/16 --service-cidr=100.96.0.0/12
   args:
     chdir: $HOME
   register: result
@@ -11,6 +11,7 @@
 - name: create .kube directory
   file:
     path: $HOME/.kube
+    state: directory
   register: result
 - debug:
     msg:

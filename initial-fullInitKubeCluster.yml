@@ -6,10 +6,10 @@
   - swapOff
   - initKubeCluster
   - getJoinCommand
-  - addSubnet
+  # - addSubnet
 
 - hosts: nodes
   roles:
   - swapOff
   - joinNodes
-  - addSubnet
+  # - addSubnet
