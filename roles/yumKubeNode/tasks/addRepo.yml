@@ -8,7 +8,6 @@
     gpgcheck: yes
     repo_gpgcheck: yes
     gpgkey: https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
-
   register: result
 - debug:
     msg:

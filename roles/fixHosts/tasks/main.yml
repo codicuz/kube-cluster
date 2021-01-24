@@ -1,0 +1,11 @@
+---
+- name: Change hosts
+  template:
+    src: hosts.j2
+    dest: /etc/hosts
+    backup: yes
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"
+    

@@ -1,0 +1,12 @@
+---
+- name: enable crio
+  systemd:
+    name: crio
+    daemon_reload: yes
+    enabled: yes
+
+- name: start crio
+  shell: systemctl start crio
+  register: result
+- debug:
+    msg: "{{ result }}"

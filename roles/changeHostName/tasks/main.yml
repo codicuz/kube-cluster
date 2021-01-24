@@ -1,0 +1,8 @@
+---
+- name: change hostname
+  hostname:
+    name: "{{ hostname }}"
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"

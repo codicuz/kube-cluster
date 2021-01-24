@@ -3,4 +3,3 @@
 - hosts: nodes
   roles:
   - yumKubeNode
-  - configureCrio

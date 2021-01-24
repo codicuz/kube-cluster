@@ -1,4 +1,5 @@
-- include: addRepo.yml
+# - include: addRepo.yml
 - include: installKubelet.yml
 - include: installKubeadm.yml
 - include: installKubectl.yml
+- include: enableKubeletDaemon.yml

@@ -2,6 +2,24 @@
 
 - hosts: masters
   roles:
-  - removePackages
-  - installPackages
-  - installDockerCe
+    - addYumRepo
+    - changeHostName
+    - removePackages
+    - updateAllPackages
+    - installPackages
+    - configureHost
+    - configureCrio
+    - fixHosts
+    - rebootHost
+
+- hosts: nodes
+  roles:
+    - addYumRepo
+    - changeHostName
+    - removePackages
+    - updateAllPackages
+    - installPackages
+    - configureHost
+    - configureCrio
+    - fixHosts
+    - rebootHost

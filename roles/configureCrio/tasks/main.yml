@@ -1,4 +1,7 @@
 - include: copyCrioConfigFile.yml
 - include: copy99KubernetesCriConfigFile.yml
+- include: modifyCrioConf.yml
 - include: shellCmdI.yml
-- include: installCrio.yml
+- include: copyRegistriesConf.yml
+- include: configureDaemon.yml
+# - include: installCrio.yml

@@ -1,6 +1,6 @@
 ---
 - name: initialize the cluster
-  shell: kubeadm init --pod-network-cidr=10.200.0.0/16 --service-cidr=100.96.0.0/12
+  shell: kubeadm init --pod-network-cidr=10.200.0.0/16 --service-cidr=100.96.0.0/12 --image-repository 192.168.88.2:5005
   ignore_errors: yes
   args:
     chdir: $HOME

@@ -1,0 +1,20 @@
+---
+- name: disable firewalld
+  systemd:
+    name: firewalld
+    enabled: no
+
+- name: stop firewalld
+  shell: systemctl stop firewalld
+  register: result
+- debug:
+    msg: "{{ result }}"
+
+- name: turnoff selinux
+  lineinfile:
+    path: /etc/selinux/config
+    regexp: '^SELINUX='
+    line: SELINUX=disabled
+  register: result
+- debug:
+    msg: "{{ result }}"

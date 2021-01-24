@@ -1,0 +1,96 @@
+---
+- name: remove all repos
+  file:
+    path: /etc/yum.repos.d
+    state: absent
+  register: result
+- debug:
+    msg: "{{ result }}"
+
+- name: make dir yum.repos.d
+  file:
+    path: /etc/yum.repos.d
+    state: directory
+  register: result
+- debug:
+    msg: "{{ result }}"
+
+- name: add CentOS-Stream-AppStream.repo
+  yum_repository:
+    name: CentOS-Stream-AppStream
+    description: CentOS-Stream-AppStream
+    baseurl: http://{{ mirror_host }}/repository/centos-mirror/{{ os_version }}/AppStream/x86_64/os
+    enabled: yes
+    gpgcheck: yes
+    repo_gpgcheck: no
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+  register: result
+- debug:
+    msg: "{{ result }}"
+
+- name: add CentOS-Stream-BaseOS.repo
+  yum_repository:
+    name: CentOS-Stream-BaseOS
+    description: CentOS-Stream-BaseOS
+    baseurl: http://{{ mirror_host }}/repository/centos-mirror/{{ os_version }}/BaseOS/x86_64/os
+    enabled: yes
+    gpgcheck: yes
+    repo_gpgcheck: no
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+  register: result
+- debug:
+    msg: "{{ result }}"
+
+- name: add CentOS-Stream-Extras.repo
+  yum_repository:
+    name: CentOS-Stream-Extras
+    description: CentOS-Stream-Extras
+    baseurl: http://{{ mirror_host }}/repository/centos-mirror/{{ os_version }}/extras/x86_64/os
+    enabled: yes
+    gpgcheck: yes
+    repo_gpgcheck: no
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+  register: result
+- debug:
+    msg: "{{ result }}"
+
+- name: add devel:kubic:libcontainers:stable.repo
+  yum_repository:
+    name: devel:kubic:libcontainers:stable
+    description: devel_kubic_libcontainers_stable
+    baseurl: http://{{ mirror_host }}/repository/cri-o/repositories/devel:/kubic:/libcontainers:/stable/{{ os }}/
+    enabled: yes
+    gpgcheck: yes
+    repo_gpgcheck: no
+    gpgkey: http://{{ mirror_host }}/repository/cri-o/repositories/devel:/kubic:/libcontainers:/stable/{{ os }}/repodata/repomd.xml.key
+  register: result
+- debug:
+    msg: "{{ result }}"
+
+- name: add devel:kubic:libcontainers:stable.repo
+  yum_repository:
+    name: devel:kubic:libcontainers:stable:cri-o:{{ version }}
+    description: devel_kubic_libcontainers_stable_cri-o_{{ version }}
+    baseurl: http://{{ mirror_host }}/repository/cri-o/repositories/devel:/kubic:/libcontainers:/stable:/cri-o:/{{ version }}/{{ os }}/
+    enabled: yes
+    gpgcheck: yes
+    repo_gpgcheck: no
+    gpgkey: http://{{ mirror_host }}/repository/cri-o/repositories/devel:/kubic:/libcontainers:/stable:/cri-o:/{{ os }}/{{ version }}/repodata/repomd.xml.key
+  register: result
+- debug:
+    msg: "{{ result }}"
+
+- name: add kubernetes YUM repository
+  yum_repository:
+    name: Kubernetes
+    description: Kubernetes repository
+    baseurl: http://{{ mirror_host }}/repository/google-cloud/yum/repos/kubernetes-el7-x86_64
+    enabled: yes
+    gpgcheck: yes
+    repo_gpgcheck: no
+    gpgkey: http://{{ mirror_host }}/repository/google-cloud/yum/doc/yum-key.gpg http://{{ mirror_host }}/repository/google-cloud/yum/doc/rpm-package-key.gpg
+
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"

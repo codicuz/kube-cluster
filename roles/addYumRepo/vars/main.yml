@@ -1,0 +1,4 @@
+version: '1.20'
+os: 'CentOS_8_Stream'
+mirror_host: '192.168.88.2:8081'
+os_version: '8-stream'

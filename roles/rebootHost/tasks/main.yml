@@ -1,0 +1,6 @@
+---
+- name: Reboot host
+  reboot:
+  register: result
+- debug:
+    msg: "{{ result }}"
