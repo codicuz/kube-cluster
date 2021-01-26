@@ -1,6 +1,6 @@
 ---
 - name: initialize the cluster
-  shell: kubeadm init --pod-network-cidr=10.200.0.0/16 --service-cidr=100.96.0.0/12 --image-repository 192.168.88.2:5005
+  shell: kubeadm init --pod-network-cidr=10.244.0.0/16 --service-cidr=100.96.0.0/12 --image-repository 192.168.88.2:5005
   ignore_errors: yes
   args:
     chdir: $HOME
@@ -30,7 +30,7 @@
     - "{{ result }}"
 
 - name: install Pod network
-  shell: kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+  shell: kubectl apply -f http://192.168.88.2:8081/repository/raw-kube/spec/kube-flannel.yml
   register: result
 - debug:
     msg:
