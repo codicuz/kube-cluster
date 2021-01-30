@@ -1,0 +1,14 @@
+---
+- name: run Nginx
+  shell: kubectl apply -f http://192.168.88.2:8081/repository/raw-kube/spec/nginx.yml
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"
+
+- name: run Gitlab
+  shell: kubectl apply -f http://192.168.88.2:8081/repository/raw-kube/spec/gitlab.yml
+  register: result
+- debug:
+    msg:
+    - "{{ result }}"

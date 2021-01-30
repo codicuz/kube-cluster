@@ -1,0 +1,5 @@
+#!/usr/bin/env ansible-playbook
+
+- hosts: 192.168.88.58
+  roles:
+  - runDeploy

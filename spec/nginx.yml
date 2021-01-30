@@ -1,0 +1,107 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nginx-pv-www
+  labels:
+    storage-name: lbl-nginx-www
+spec:
+  capacity:
+    storage: 2Mi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 192.168.88.2
+    path: "/mnt/sdd1/nfs/nginx/www"
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nginx-pv-conf-d
+  labels:
+    storage-name: lbl-nginx-conf-d
+spec:
+  capacity:
+    storage: 2Mi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 192.168.88.2
+    path: "/mnt/sdd1/nfs/nginx/conf.d"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nginx-pvc-conf-d
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 1Mi
+  selector:
+    matchLabels:
+      storage-name: lbl-nginx-conf-d
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nginx-pvc-www
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 1Mi
+  selector:
+    matchLabels:
+      storage-name: lbl-nginx-www
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      hostname: nginx
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+          - name: nginx
+            containerPort: 80
+        volumeMounts:
+            - name: nginx-pvc-www
+              mountPath: "/www"
+            - name: nginx-pvc-conf-d
+              mountPath: "/etc/nginx/conf.d"
+      volumes:
+      - name: nginx-pvc-www
+        persistentVolumeClaim:
+          claimName: nginx-pvc-www
+      - name: nginx-pvc-conf-d
+        persistentVolumeClaim:
+          claimName: nginx-pvc-conf-d
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: "nginx-svc"
+  namespace: "default"
+spec:
+  ports:
+    - port: 80
+      nodePort: 30080
+  type: NodePort
+  selector:
+    app: "nginx"

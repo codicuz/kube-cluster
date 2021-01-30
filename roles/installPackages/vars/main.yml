@@ -3,3 +3,4 @@ packages:
   - tar
   - cri-o
   - iproute-tc
+  - nfs-utils

@@ -16,6 +16,9 @@ then
 fi
 
 case "$1" in
+-runDeploy)
+	ansible-playbook -i inventory.yml initial-runDeploy.yml
+	;;
 -aptKubeMaster)
 	ansible-playbook -i inventory.yml initial-aptKubeMaster.yml
 	;;

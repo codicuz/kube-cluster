@@ -1,0 +1,77 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nexus-pv-data
+  labels:
+    storage-name: lbl-nexus-data
+spec:
+  capacity:
+    storage: 2Mi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 192.168.88.2
+    path: "/mnt/sdd1/nfs/nexus/nexus-data"
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nexus-pvc-data
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 1Mi
+  selector:
+    matchLabels:
+      storage-name: lbl-nexus-data
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nexus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nexus
+  template:
+    metadata:
+      labels:
+        app: nexus
+    spec:
+      hostname: nexus
+      containers:
+      - name: nexus
+        image: sonatype/nexus3:latest
+        ports:
+          - name: nexus
+            containerPort: 8081
+        volumeMounts:
+            - name: nexus-pvc-data
+              mountPath: "/nexus-data"
+        resources:
+          limits:
+            cpu: "4"
+          requests:
+            cpu: "0.5"
+      volumes:
+      - name: nexus-pvc-data
+        persistentVolumeClaim:
+          claimName: nexus-pvc-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: "nexus-svc"
+  namespace: "default"
+spec:
+  ports:
+    - port: 8081
+      nodePort: 32081
+  type: NodePort
+  selector:
+    app: "nexus"
