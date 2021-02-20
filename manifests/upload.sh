@@ -10,6 +10,7 @@ function __fileUploader() {
 
 files=(
     kube-flannel.yml
+    mysql.yml
     nexus.yml
     gitlab.yml
     nginx.yml
